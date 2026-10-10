@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6eee0;
+  --foreground: #2b1d12;
+  --muted: #7a6a58;
+  --card: #fffaf1;
+  --orange: #f58220;
+  --olive: #76902b;
+  --teal: #2fa3c7;
+  color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-brand: var(--orange);
+  --color-olive: var(--olive);
+  --color-teal: var(--teal);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: var(--font-poppins), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* iOS-style frosted glass */
+.glass {
+  background: rgb(255 250 241 / 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* iPhone frame */
+.iphone {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 9 / 19.3;
+  padding: 10px;
+  border-radius: 54px;
+  background: linear-gradient(145deg, #3a3a3c, #111);
+  box-shadow:
+    0 0 0 2px #5a5a5e inset,
+    0 40px 80px -20px rgb(43 29 18 / 0.45),
+    0 20px 40px -20px rgb(43 29 18 / 0.35);
+}
+
+.iphone::before,
+.iphone::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: #3a3a3c;
+}
+
+/* side buttons */
+.iphone::before {
+  left: -3px;
+  top: 110px;
+  height: 56px;
+  box-shadow: 0 74px 0 #3a3a3c;
+}
+
+.iphone::after {
+  right: -3px;
+  top: 150px;
+  height: 84px;
+}
+
+.iphone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 44px;
+  background: var(--background);
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  width: 92px;
+  height: 27px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .float {
+    animation: none;
+  }
 }
